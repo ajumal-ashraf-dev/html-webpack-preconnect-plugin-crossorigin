@@ -1,5 +1,5 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var HtmlWebpackPreconnectPlugin = require('../index')
+var HtmlWebpackPreconnectPluginCrossorigin = require('../index')
 
 module.exports = {
   entry: './index.js',
@@ -23,6 +23,6 @@ module.exports = {
       ],
     }),
 
-    new HtmlWebpackPreconnectPlugin(),
+    new HtmlWebpackPreconnectPluginCrossorigin(),
   ]
 }

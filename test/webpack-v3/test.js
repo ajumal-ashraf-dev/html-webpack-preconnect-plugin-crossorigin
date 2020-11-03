@@ -5,7 +5,7 @@ const MemoryFileSystem = require('memory-fs');
 const webpack = require('./node_modules/webpack')
 const HtmlWebpackPlugin = require('./node_modules/html-webpack-plugin')
 
-const HtmlWebpackPreconnectPlugin = require('../../index')
+const HtmlWebpackPreconnectPluginCrossorigin = require('../../index')
 
 describe('preconnect - webpack 3', function() {
   it('adds preconnect tags', function(done) {
@@ -25,7 +25,7 @@ describe('preconnect - webpack 3', function() {
             'https://fonts.gstatic.com',
           ],
         }),
-        new HtmlWebpackPreconnectPlugin(),
+        new HtmlWebpackPreconnectPluginCrossorigin(),
       ]
     }, function(err, result) {
       if (err) {

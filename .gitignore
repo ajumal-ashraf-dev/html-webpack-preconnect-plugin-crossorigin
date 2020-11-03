@@ -3,3 +3,4 @@ package-lock.json
 test/webpack-v3/dist/
 test/webpack-v4/dist/
 example/dist
+.npmrc
