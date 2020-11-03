@@ -18,6 +18,10 @@ describe('preconnect - webpack 3', function() {
         new HtmlWebpackPlugin({
           preconnect: [
             'http://api1.example.com',
+            {
+              url: 'http://api2.example.com',
+              crossorigin: 'use_credentials'
+            },
             'https://fonts.gstatic.com',
           ],
         }),
@@ -34,9 +38,10 @@ describe('preconnect - webpack 3', function() {
       }
 
       const html = result.compilation.assets['index.html'].source();
-      assert.equal(typeof html, 'string')
+      assert.strictEqual(typeof html, 'string')
       assert.ok(html.includes('<link rel="preconnect" href="http://api1.example.com"'))
       assert.ok(html.includes('<link rel="preconnect" href="https://fonts.gstatic.com"'))
+      assert.ok(html.includes('<link rel="preconnect" href="http://api2.example.com" crossorigin="use_credentials"'))
 
       done()
     })

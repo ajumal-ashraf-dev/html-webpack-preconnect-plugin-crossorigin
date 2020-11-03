@@ -14,7 +14,11 @@ module.exports = {
       template: 'template.html',
       filename: 'index.html',
       preconnect: [
-        'http://api1.example.com',
+        {
+          url: 'http://api1.example.com',
+          crossorigin: 'use_credentials'
+        },
+        'http://api2.example.com',
         'https://fonts.gstatic.com',
       ],
     }),

@@ -2,26 +2,28 @@
 var assert = require('assert')
 
 /**
- * html webpack preconnect plugin
+ * html webpack preconnect plugin crossorigin
  * @class
  */
-function HtmlWebpackPreconnectPlugin(options) {
-  assert.equal(options, undefined, 'The ResourceHintWebpackPlugin does not accept any options')
+function HtmlWebpackPreconnectPluginCrossorigin(options) {
+  assert.strictEqual(options, undefined, 'The ResourceHintWebpackPlugin does not accept any options')
 }
 
 const addPreconnectLinks = function (htmlPluginData, callback) {
   var origins = htmlPluginData.plugin.options.preconnect;
-  assert.equal(origins instanceof Array, true, new TypeError('origins need array'));
+  htmlPluginData.html += 'The Magic Footer'
+  assert.strictEqual(origins instanceof Array, true, new TypeError('origins need array'));
   origins.forEach(function (origin) {
     // webpack config may contain quotos, remove that
-    var href = origin.replace(/['"]+/g, '');
+    var href = typeof origin === 'string' ? origin : origin.url;
+    href = href.replace(/['"]+/g, '');
     var tag = {
       tagName: 'link',
       selfClosingTag: false,
       attributes: {
         rel: 'preconnect',
         href: href,
-        crossorigin: ''
+        crossorigin: origin.crossorigin || ''
       }
     };
 
@@ -34,10 +36,10 @@ const addPreconnectLinks = function (htmlPluginData, callback) {
   callback(null, htmlPluginData);
 }
 
-HtmlWebpackPreconnectPlugin.prototype.apply = function (compiler) {
+HtmlWebpackPreconnectPluginCrossorigin.prototype.apply = function (compiler) {
   // Webpack 4
   if (compiler.hooks) {
-    compiler.hooks.compilation.tap('htmlWebpackPreconnectPlugin', function(compilation) {
+    compiler.hooks.compilation.tap('htmlWebpackPreconnectPluginCrossorigin', function(compilation) {
       // Hook into the html-webpack-plugin processing
       var hook
       if (typeof compilation.hooks.htmlWebpackPluginAlterAssetTags !== 'undefined') {
@@ -48,9 +50,9 @@ HtmlWebpackPreconnectPlugin.prototype.apply = function (compiler) {
       }
 
       if (hook) {
-        hook.tapAsync('htmlWebpackPreconnectPlugin', addPreconnectLinks)
+        hook.tapAsync('htmlWebpackPreconnectPluginCrossorigin', addPreconnectLinks)
       } else {
-        console.error('The html-webpack-preconect-plugin not work because it is not compatible with current html-webpack-plugin.')
+        console.error('The html-webpack-preconect-plugin-crossorigin does not work because it is not compatible with current html-webpack-plugin.')
       }
     })
 
@@ -63,4 +65,4 @@ HtmlWebpackPreconnectPlugin.prototype.apply = function (compiler) {
   }
 }
 
-module.exports = HtmlWebpackPreconnectPlugin
+module.exports = HtmlWebpackPreconnectPluginCrossorigin;
