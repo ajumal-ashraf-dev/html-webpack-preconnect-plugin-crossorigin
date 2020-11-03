@@ -20,7 +20,7 @@ describe('preconnect - webpack 3', function() {
             'http://api1.example.com',
             {
               url: 'http://api2.example.com',
-              crossorigin: 'use_credentials'
+              crossorigin: 'use-credentials'
             },
             'https://fonts.gstatic.com',
           ],
@@ -41,7 +41,7 @@ describe('preconnect - webpack 3', function() {
       assert.strictEqual(typeof html, 'string')
       assert.ok(html.includes('<link rel="preconnect" href="http://api1.example.com"'))
       assert.ok(html.includes('<link rel="preconnect" href="https://fonts.gstatic.com"'))
-      assert.ok(html.includes('<link rel="preconnect" href="http://api2.example.com" crossorigin="use_credentials"'))
+      assert.ok(html.includes('<link rel="preconnect" href="http://api2.example.com" crossorigin="use-credentials"'))
 
       done()
     })

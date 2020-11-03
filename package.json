@@ -1,7 +1,7 @@
 {
   "name": "html-webpack-preconnect-plugin",
   "version": "1.3.0",
-  "description": "Embed <link rel=\"preconnect\" crossorigin=\"anonymous | use_credentials\"> into HtmlWebpackPlugin pages",
+  "description": "Embed <link rel=\"preconnect\" crossorigin=\"anonymous | use-credentials\"> into HtmlWebpackPlugin pages",
   "main": "index.js",
   "scripts": {
     "test": "npx mocha \"./test/*/test.js\""
@@ -33,5 +33,6 @@
   "peerDependencies": {
     "webpack": ">= 3.12.0",
     "html-webpack-plugin": ">= 3.2.0"
-  }
+  },
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
 }

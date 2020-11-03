@@ -16,7 +16,7 @@ module.exports = {
       preconnect: [
         {
           url: 'http://api1.example.com',
-          crossorigin: 'use_credentials'
+          crossorigin: 'use-credentials'
         },
         'http://api2.example.com',
         'https://fonts.gstatic.com',
